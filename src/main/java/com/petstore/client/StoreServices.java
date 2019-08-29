@@ -1,5 +1,6 @@
 package com.petstore.client;
 
+import com.petstore.utilities.Paths;
 import com.petstore.models.Order;
 
 import io.restassured.response.Response;

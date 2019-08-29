@@ -1,60 +1,55 @@
 package com.petstore;
 
+import com.petstore.assertion.StatusCodeAssertion;
+import com.petstore.utilities.StatusCodes;
 import com.petstore.assertion.UserAssertion;
 import com.petstore.business.UserBL;
 import com.petstore.client.UserServices;
 import com.petstore.models.User;
 import io.restassured.response.Response;
-import org.testng.AssertJUnit;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class UserTest extends UserServices {
-    private static User testStaticUser;
+    private static User testStaticUser =  new UserBL().createUser();
     private User testUser;
+    private Response response;
 
-    @BeforeClass
-    public void setUp() {
-        testStaticUser = new UserBL().createUser();
-    }
-
-    @Test(priority = 1)
+    @Test
     public void addNewUserTest() {
-        Response response = createUser(testStaticUser);
-        System.out.println(response.toString());
+        response = createUser(testStaticUser);
         User newUser = new UserBL().createUser();
         UserAssertion.assertThat(response.getBody().as(User.class)).isEqualTo(newUser);
     }
 
-    @Test(priority = 2)
+    @Test
     public void loginUserTest() {
-        Response response = loginUser(testStaticUser);
-        AssertJUnit.assertEquals(200,response.getStatusCode());
+        response = loginUser(testStaticUser);
+        StatusCodeAssertion.statusCodeAssert( response, StatusCodes.Success.getValue());
     }
 
-    @Test(priority = 3)
+    @Test
     public void logoutUserTest() {
-        Response response = logoutUser(testStaticUser);
-        AssertJUnit.assertEquals(200,response.getStatusCode());
+        response = logoutUser(testStaticUser);
+        StatusCodeAssertion.statusCodeAssert( response, StatusCodes.Success.getValue());
     }
 
-    @Test(priority = 4)
+    @Test
     public void getUserByUsernameTest() {
-        Response response = getUserByUsername(testStaticUser.getUsername());
-        AssertJUnit.assertEquals(200,response.getStatusCode());
+        response = getUserByUsername(testStaticUser.getUsername());
+        StatusCodeAssertion.statusCodeAssert( response, StatusCodes.Success.getValue());
     }
 
-    @Test(priority = 5)
+    @Test
     public void updateUserTest() {
         testUser = new UserBL().doUpdate(testStaticUser.getUsername());
-        Response response = updateUser(testStaticUser.getUsername(),testStaticUser);
+        response = updateUser(testStaticUser.getUsername(),testStaticUser);
         UserAssertion.assertThat(response.getBody().as(User.class))
                 .hasId(testUser.getId());
     }
 
-    @Test(priority = 6)
+    @Test
     public void deleteUserTest() {
-        Response response = deleteUser(testStaticUser.getUsername());
-        AssertJUnit.assertEquals(200,response.getStatusCode());
+        response = deleteUser(testStaticUser.getUsername());
+        StatusCodeAssertion.statusCodeAssert( response, StatusCodes.Success.getValue());
     }
 }

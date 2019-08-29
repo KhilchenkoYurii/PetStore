@@ -1,44 +1,52 @@
 package com.petstore;
 
+import com.petstore.assertion.StatusCodeAssertion;
+import com.petstore.utilities.StatusCodes;
 import com.petstore.assertion.StoreAssertion;
 import com.petstore.business.StoreBL;
 import com.petstore.client.StoreServices;
 import com.petstore.models.Order;
 import io.restassured.response.Response;
-import org.testng.AssertJUnit;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class StoreTest extends StoreServices {
-    private static Order testStatOrder;
-    private Order testOrder;
+    private static Order testStatOrder = new StoreBL().createOrder();
+    private Response response;
 
-    @BeforeClass
-    public static void setUp() {
-        testStatOrder = new StoreBL().createOrder();
-    }
-
-    @Test(priority = 1)
+    @Test
     public void postOrderTest() {
-        Response response = postOrder(testStatOrder);
+        response = postOrder(testStatOrder);
         Order newOrder = new StoreBL().createOrder();
         StoreAssertion.assertThat(response.getBody().as(Order.class)).isEqualTo(newOrder);
     }
+
     @Test
     public void getInventoryTest() {
-        Response response = getInventory();
-        AssertJUnit.assertEquals(200, response.getStatusCode());
+        response = getInventory();
+        StatusCodeAssertion.statusCodeAssert( response, StatusCodes.Success.getValue());
     }
 
-    @Test(priority = 2)
+    @Test
     public void getOrderByIdTest() {
-        Response response = getOrderById(testStatOrder.getId());
-        AssertJUnit.assertEquals(200,response.getStatusCode());
+        response = getOrderById(testStatOrder.getId());
+        StatusCodeAssertion.statusCodeAssert( response, StatusCodes.Success.getValue());
     }
 
-    @Test(priority = 3)
+    @Test
     public void deleteOrderTest() {
-        Response response = deleteOrder(testStatOrder.getId());
-        AssertJUnit.assertEquals(200,response.getStatusCode());
+        response = deleteOrder(testStatOrder.getId());
+        StatusCodeAssertion.statusCodeAssert( response, StatusCodes.Success.getValue());
+    }
+
+    @Test
+    public void getOrderByIdTestNeg() {
+        response = getOrderById(123);
+        StatusCodeAssertion.statusCodeAssert( response, StatusCodes.NotFoundError.getValue());
+    }
+
+    @Test
+    public void deleteOrderTestNeg() {
+        response = deleteOrder(123);
+        StatusCodeAssertion.statusCodeAssert( response, StatusCodes.NotFoundError.getValue());
     }
 }

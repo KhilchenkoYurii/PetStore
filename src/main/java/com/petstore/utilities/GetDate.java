@@ -1,4 +1,4 @@
-package com.petstore.models;
+package com.petstore.utilities;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;

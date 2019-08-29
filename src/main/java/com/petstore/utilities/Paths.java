@@ -1,4 +1,4 @@
-package com.petstore.client;
+package com.petstore.utilities;
 
 public class Paths {
     public static final String petUrl = "/v2/pet";

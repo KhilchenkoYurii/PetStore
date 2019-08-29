@@ -1,7 +1,7 @@
 package com.petstore.business;
 
 import com.petstore.client.StoreServices;
-import com.petstore.models.GetDate;
+import com.petstore.utilities.GetDate;
 import com.petstore.models.Order;
 import com.petstore.models.Status;
 import io.restassured.response.Response;
