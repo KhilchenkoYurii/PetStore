@@ -1,9 +1,9 @@
-package com.petstore.business.StoreBL;
+package com.petstore.business;
 
-import com.petstore.client.store.StoreServices;
+import com.petstore.client.StoreServices;
+import com.petstore.models.GetDate;
 import com.petstore.models.Order;
-import com.petstore.models.OrderStatus;
-import com.sun.org.apache.xpath.internal.operations.Or;
+import com.petstore.models.Status;
 import io.restassured.response.Response;
 import org.apache.commons.lang3.RandomStringUtils;
 
@@ -15,8 +15,8 @@ public class StoreBL {
                 .id(id)
                 .petId(id)
                 .quantity(id)
-                .shipDate(RandomStringUtils.randomAlphabetic(8))
-                .status(OrderStatus.Approved)
+                .shipDate(GetDate.getShipDate())
+                .status(Status.Placed.getValue())
                 .complete(false)
                 .build();
         return order;

@@ -1,6 +1,5 @@
-package com.petstore.client.user;
+package com.petstore.client;
 
-import com.petstore.client.SetUp;
 import com.petstore.models.User;
 import io.restassured.response.Response;
 
@@ -9,7 +8,7 @@ import static io.restassured.RestAssured.given;
 public class UserServices extends SetUp {
 
     public UserServices() {
-        super(UserPath.userUrl);
+        super(Paths.userUrl);
     }
 
     public Response createUser(User user) {
@@ -20,12 +19,12 @@ public class UserServices extends SetUp {
 
     public Response loginUser(User user) {
         return given(createRequest())
-                .get(UserPath.userLoginUrl + user.getUsername()+"&password=" + user.getPassword());
+                .get(Paths.userLoginUrl + user.getUsername()+"&password=" + user.getPassword());
     }
 
     public Response logoutUser(User user) {
         return given(createRequest())
-                .get(UserPath.userLogoutUrl);
+                .get(Paths.userLogoutUrl);
     }
 
     public Response getUserByUsername(String username) {

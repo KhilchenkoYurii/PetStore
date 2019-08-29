@@ -1,9 +1,8 @@
 package com.petstore;
 
-import com.petstore.assertion.petAssertions.PetAssertion;
-import com.petstore.assertion.userAssertions.UserAssertion;
-import com.petstore.business.UserBL.UserBL;
-import com.petstore.client.user.UserServices;
+import com.petstore.assertion.UserAssertion;
+import com.petstore.business.UserBL;
+import com.petstore.client.UserServices;
 import com.petstore.models.User;
 import io.restassured.response.Response;
 import org.testng.AssertJUnit;

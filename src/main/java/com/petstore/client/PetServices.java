@@ -1,8 +1,6 @@
-package com.petstore.client.pet;
+package com.petstore.client;
 
-import com.petstore.client.SetUp;
 import com.petstore.models.Pet;
-import com.petstore.models.PetStatus;
 import io.restassured.response.Response;
 
 import java.io.File;
@@ -13,7 +11,7 @@ public class PetServices  extends SetUp {
 
     public PetServices() {
 
-        super(PetPath.petUrl);
+        super(Paths.petUrl);
     }
 
     public Response addNewPet (Pet pet) {
@@ -27,9 +25,9 @@ public class PetServices  extends SetUp {
                 .get("" + id);
     }
 
-    public Response getPetByStatus(PetStatus status) {
+    public Response getPetByStatus(String status) {
         return given(createRequest())
-                .get(PetPath.petFindByStatusPath + status.toString());
+                .get(Paths.petFindByStatusPath + status);
     }
 
     public  Response updatePet(Pet pet) {
@@ -43,8 +41,8 @@ public class PetServices  extends SetUp {
                 .delete("" + id);
     }
 
-    public Response petPostUploadImage(String id) {
-        File file = new File("C:\\Users\\Максим\\Downloads\\testIMG.jpg");
+    public Response petPostUploadImage(int id) {
+        File file = new File("C:\\Users\\gembi\\Desktop\\SoftServ IT Academy\\unnamed.png");
         return given(createRequest())
                 .pathParam("id",id)
                 .contentType("multipart/form-data")

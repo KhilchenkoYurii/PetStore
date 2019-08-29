@@ -1,8 +1,8 @@
 package com.petstore;
 
-import com.petstore.assertion.storeAssertions.StoreAssertion;
-import com.petstore.business.StoreBL.StoreBL;
-import com.petstore.client.store.StoreServices;
+import com.petstore.assertion.StoreAssertion;
+import com.petstore.business.StoreBL;
+import com.petstore.client.StoreServices;
 import com.petstore.models.Order;
 import io.restassured.response.Response;
 import org.testng.AssertJUnit;
@@ -23,6 +23,11 @@ public class StoreTest extends StoreServices {
         Response response = postOrder(testStatOrder);
         Order newOrder = new StoreBL().createOrder();
         StoreAssertion.assertThat(response.getBody().as(Order.class)).isEqualTo(newOrder);
+    }
+    @Test
+    public void getInventoryTest() {
+        Response response = getInventory();
+        AssertJUnit.assertEquals(200, response.getStatusCode());
     }
 
     @Test(priority = 2)

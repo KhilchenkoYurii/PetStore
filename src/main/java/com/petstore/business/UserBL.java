@@ -1,13 +1,13 @@
-package com.petstore.business.UserBL;
+package com.petstore.business;
 
-import com.petstore.client.user.UserServices;
+import com.petstore.client.UserServices;
 import com.petstore.models.User;
 import io.restassured.response.Response;
 import org.apache.commons.lang3.RandomStringUtils;
 
 public class UserBL {
-    private int randomInt = Integer.parseInt(RandomStringUtils.randomNumeric(5));
-    private  String randomString = RandomStringUtils.randomAlphabetic(10);
+    private int randomInt = Integer.parseInt(RandomStringUtils.randomNumeric(2));
+    private  String randomString = RandomStringUtils.randomAlphabetic(6);
 
     public User createUser() {
         User newUser = User.builder()

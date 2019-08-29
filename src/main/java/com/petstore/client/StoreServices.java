@@ -1,6 +1,5 @@
-package com.petstore.client.store;
+package com.petstore.client;
 
-import com.petstore.client.SetUp;
 import com.petstore.models.Order;
 
 import io.restassured.response.Response;
@@ -10,22 +9,27 @@ import static io.restassured.RestAssured.given;
 public class StoreServices extends SetUp {
 
     public StoreServices() {
-        super(StorePath.storeOrderUrl);
+        super(Paths.storeUrl);
     }
 
     public Response postOrder(Order order) {
         return given(createRequest())
                 .body(order)
-                .post();
+                .post("" + Paths.storeOrderUrl);
+    }
+
+    public Response getInventory() {
+        return given(createRequest())
+                .get(Paths.storeInventoryUrl);
     }
 
     public  Response getOrderById(int id) {
         return given(createRequest())
-                .get("" + id);
+                .get(Paths.storeOrderUrl + id);
     }
 
     public Response deleteOrder(int id) {
         return given(createRequest())
-                .delete("" + id);
+                .delete(Paths.storeOrderUrl + id);
     }
 }

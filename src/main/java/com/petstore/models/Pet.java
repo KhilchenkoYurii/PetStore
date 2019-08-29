@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
+import java.util.List;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -19,10 +21,10 @@ public class Pet {
 	@JsonProperty("name")
 	private String name;
 	@JsonProperty("photoUrls")
-	private String photoUrls;
+	private List<String> photoUrls;
 	@JsonProperty("tags")
-	private Tag tags;
+	private List<Tag> tags;
 	@JsonProperty("status")
-	private PetStatus status;
+	private String status = "available";
 
 }

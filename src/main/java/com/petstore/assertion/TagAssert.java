@@ -1,4 +1,4 @@
-package com.petstore.assertion.otherAssertions;
+package com.petstore.assertion;
 
 import com.petstore.models.Tag;
 import org.assertj.core.api.SoftAssertions;

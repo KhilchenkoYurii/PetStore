@@ -1,8 +1,6 @@
-package com.petstore.assertion.storeAssertions;
+package com.petstore.assertion;
 
-import com.petstore.client.store.StorePath;
 import com.petstore.models.Order;
-import com.petstore.models.OrderStatus;
 import org.assertj.core.api.SoftAssertions;
 
 public class StoreAssertion {
@@ -34,8 +32,8 @@ public class StoreAssertion {
         softAssertions.assertThat(actualShipDate).as("ShipDate").isEqualTo(shipDate);
     }
 
-    public void hasStatus(OrderStatus status) {
-        OrderStatus actualStatus = actual.getStatus();
+    public void hasStatus(String status) {
+        String actualStatus = actual.getStatus();
         softAssertions.assertThat(actualStatus).as("Status").isEqualTo(status);
     }
 

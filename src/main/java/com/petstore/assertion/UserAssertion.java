@@ -1,4 +1,4 @@
-package com.petstore.assertion.userAssertions;
+package com.petstore.assertion;
 
 import com.petstore.models.User;
 import org.assertj.core.api.SoftAssertions;

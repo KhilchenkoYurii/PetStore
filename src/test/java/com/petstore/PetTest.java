@@ -1,12 +1,10 @@
 package com.petstore;
 
-import com.petstore.assertion.petAssertions.PetAssertion;
-import com.petstore.business.PetBL.PetBL;
-import com.petstore.client.pet.PetServices;
+import com.petstore.assertion.PetAssertion;
+import com.petstore.business.PetBL;
+import com.petstore.client.PetServices;
 import com.petstore.models.Pet;
-import com.petstore.models.PetStatus;
 import io.restassured.response.Response;
-import org.assertj.core.api.SoftAssertions;
 import org.testng.AssertJUnit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -37,7 +35,13 @@ public class PetTest extends PetServices {
 
     @Test(priority = 5)
     public void getPetByStatus() {
-        Response response = getPetByStatus(PetStatus.Avilable);
+        Response response = getPetByStatus("available");
+        AssertJUnit.assertEquals(200, response.getStatusCode());
+    }
+
+    @Test
+    public void uploadImageTest() {
+        Response response = petPostUploadImage(testStatPet.getId());
         AssertJUnit.assertEquals(200, response.getStatusCode());
     }
 

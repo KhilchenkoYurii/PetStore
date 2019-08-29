@@ -19,7 +19,7 @@ public class Order {
 	@JsonProperty("shipDate")
 	private String shipDate;
 	@JsonProperty("status")
-	private OrderStatus status;
+	private String status = "placed";
 	@JsonProperty("complete")
 	private boolean complete = false;
 }

@@ -1,10 +1,11 @@
-package com.petstore.assertion.petAssertions;
+package com.petstore.assertion;
 
 import com.petstore.models.Category;
 import com.petstore.models.Pet;
-import com.petstore.models.PetStatus;
 import com.petstore.models.Tag;
 import org.assertj.core.api.SoftAssertions;
+
+import java.util.List;
 
 public class PetAssertion {
     SoftAssertions softAssertions = new SoftAssertions();
@@ -30,18 +31,18 @@ public class PetAssertion {
         softAssertions.assertThat(actualName).as("Name").isEqualTo(name);
     }
 
-    public void hasPhotosUrls(String photoUrls) {
-        String actualPhotoUrls = actual.getPhotoUrls();
+    public void hasPhotosUrls(List<String> photoUrls) {
+        List<String> actualPhotoUrls = actual.getPhotoUrls();
         softAssertions.assertThat(actualPhotoUrls).as("PhotoUrls").isEqualTo(photoUrls);
     }
 
-    public void hasTag(Tag tag) {
-        Tag actualTag = actual.getTags();
+    public void hasTag(List<Tag> tag) {
+        List<Tag> actualTag = actual.getTags();
         softAssertions.assertThat(actualTag).as("Tag").isEqualTo(tag);
     }
 
-    public void hasStatus(PetStatus status) {
-        PetStatus actualStatus = actual.getStatus();
+    public void hasStatus(String status) {
+        String actualStatus = actual.getStatus();
         softAssertions.assertThat(actualStatus).as("Status").isEqualTo(status);
     }
 
