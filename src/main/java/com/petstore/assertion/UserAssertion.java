@@ -4,7 +4,7 @@ import com.petstore.models.User;
 import org.assertj.core.api.SoftAssertions;
 
 public class UserAssertion {
-    SoftAssertions softAssertions = new SoftAssertions();
+    private SoftAssertions softAssertions = new SoftAssertions();
     private static User actual;
 
     public static UserAssertion assertThat(User user) {

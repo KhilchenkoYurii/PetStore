@@ -14,32 +14,32 @@ public class UserTest extends UserServices {
     private User testUser;
     private Response response;
 
-    @Test
+    @Test(priority = 1)
     public void addNewUserTest() {
         response = createUser(testStaticUser);
         User newUser = new UserBL().createUser();
         UserAssertion.assertThat(response.getBody().as(User.class)).isEqualTo(newUser);
     }
 
-    @Test
+    @Test(priority = 2)
     public void loginUserTest() {
         response = loginUser(testStaticUser);
         StatusCodeAssertion.statusCodeAssert( response, StatusCodes.Success.getValue());
     }
 
-    @Test
+    @Test(priority = 3)
     public void logoutUserTest() {
         response = logoutUser(testStaticUser);
         StatusCodeAssertion.statusCodeAssert( response, StatusCodes.Success.getValue());
     }
 
-    @Test
+    @Test(priority = 4)
     public void getUserByUsernameTest() {
         response = getUserByUsername(testStaticUser.getUsername());
         StatusCodeAssertion.statusCodeAssert( response, StatusCodes.Success.getValue());
     }
 
-    @Test
+    @Test(priority = 5)
     public void updateUserTest() {
         testUser = new UserBL().doUpdate(testStaticUser.getUsername());
         response = updateUser(testStaticUser.getUsername(),testStaticUser);
@@ -47,7 +47,7 @@ public class UserTest extends UserServices {
                 .hasId(testUser.getId());
     }
 
-    @Test
+    @Test(priority = 6)
     public void deleteUserTest() {
         response = deleteUser(testStaticUser.getUsername());
         StatusCodeAssertion.statusCodeAssert( response, StatusCodes.Success.getValue());
